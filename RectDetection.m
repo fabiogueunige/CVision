@@ -1,0 +1,18 @@
+function RectDetection (window,img,nomeImg, type)
+%
+    createGraph(img,"immagine1","Gray color ","");
+    
+    %create a window for the filter
+      %Motivare la dimensione della finestra!!
+    
+    
+    Cross_img = normxcorr2(window, img);%Normalized 2-D cross-correlation
+    createGraph(Cross_img,"Correlated "+nomeImg,"Cross Correlation of "," ");
+    
+    [ypeak,xpeak] = find(Cross_img == max(Cross_img(:)));
+    createGraph(img,nomeImg,"Cross Correlation of ",type);
+    xpeak_off = xpeak - size(window,2);
+    ypeak_off = ypeak - size(window,1);
+    pos = [xpeak_off,ypeak_off,size(window,2),size(window,1)];
+    rectangle('Position',pos, "EdgeColor",[1 0 0])
+end
