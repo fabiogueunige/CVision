@@ -1,6 +1,6 @@
 %funzione main
 imgi235 = imread("i235.png");
-
+computationTime = zeros (3,6);
 img = cell(1,6);
 for ind = 1:6
     img{ind} = imread(strcat("ur_c_s_03a_01_L_03", num2str((ind+75)),".png"));
@@ -23,18 +23,21 @@ end
 % windowb3 = bigger
 windowb1 = img{1}(375:400,575:620); %facendo 400 la ultima prende il furgone
 for ind = 1:6     
-    RectDetection (windowb1,img{ind},"immagine: "+ind," Smaller")
+    computationTime(1,ind) = RectDetection (windowb1,img{ind},"immagine: "+ind," Smaller");
 end
 
 windowb2 = img{1}(375:410,570:615); %facendo 400 la ultima prende il furgone
 for ind = 1:6     
-    RectDetection (windowb2,img{ind},"immagine: "+ind," Medium")
+    computationTime(2,ind) = RectDetection (windowb2,img{ind},"immagine: "+ind," Medium");
 end
 
 windowb3 = img{1}(360:420,555:645);
 for ind = 1:6     
-    RectDetection (windowb3,img{ind},"immagine: "+ind, " Bigger")
+    computationTime(3,ind) = RectDetection (windowb3,img{ind},"immagine: "+ind, " Bigger");
 end
+
+computationTime_sum = sum(computationTime');
+computationTime_mean = mean(computationTime');
 
 
 %% Blob detection
