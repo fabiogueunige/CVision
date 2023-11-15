@@ -148,10 +148,14 @@ plot(xc, yc, 'r*', 'MarkerSize', 3);
 hold off;
 sgtitle("Full screen to show better the corner detection on imgi235 (esc to close)")
 
-%% Optional part
-
+%% Centroid corner
+figure;
 % corner centroids using regionprops
 stats = regionprops(corner_reg, 'Centroid');
+centroids = cat(1, stats.Centroid);
 % centroids on command Window
-disp('Detected Corner Centroids:');
-disp(cat(1, stats.Centroid));
+createGraph(I,"Centroid of Corner Regions"," "," ");
+hold on;
+
+plot(centroids(:,1), centroids(:,2), 'r*');
+hold off;
