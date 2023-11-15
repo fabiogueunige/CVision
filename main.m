@@ -19,19 +19,19 @@ end
 
 %% Black car that is turning implementation
 % windowb1 = smaller
-windowb1 = img{1}(375:400,575:620); %facendo 400 la ultima prende il furgone
+windowb1 = img{1}(395:400, 595:600); %facendo 400 la ultima prende il furgone
 for ind = 1:6     
     computationTime(1,ind) = RectDetection (windowb1,img{ind},"image: "+ind," Smaller");
 end
 
 % windowb2 = normal
-windowb2 = img{1}(375:410,570:615); %facendo 400 la ultima prende il furgone
+windowb2 = img{1}(385:405, 575:610); %facendo 400 la ultima prende il furgone
 for ind = 1:6     
     computationTime(2,ind) = RectDetection (windowb2,img{ind},"image: "+ind," Medium");
 end
 
 % windowb3 = bigger
-windowb3 = img{1}(360:420,555:645);
+windowb3 = img{1}(360:420, 555:645);
 for ind = 1:6     
     computationTime(3,ind) = RectDetection (windowb3,img{ind},"image: "+ind, " Bigger");
 end
