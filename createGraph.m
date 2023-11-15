@@ -1,8 +1,6 @@
 function createGraph (img,nomeImg,startadd, endadd)
     %function that creates graphs
-    figure;
-    
-    imagesc(img), colormap gray, title(startadd+" "+ nomeImg+ " image "+endadd);
+    imagesc(img), colormap gray, title(startadd+" "+ nomeImg+ " "+endadd);
     
     % %Only for saving all images and subplots
     % 
