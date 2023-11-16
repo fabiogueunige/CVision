@@ -82,7 +82,7 @@ flat_reg = zeros(rr, cc);
 R_map = zeros(rr, cc);
 k = 0.05;
 
-max_R = max(R_map(:));
+max_R = max(max(R_map(:)));
 threshold = 0.3 * max_R;
 
 for ii = 1:rr
@@ -93,7 +93,7 @@ for ii = 1:rr
         R = det(M) - k * (trace(M)^2); % from the formulas
         R_map(ii, jj) = R;
         % Threshold on value of R
-        if R < -threshold
+        if R < -threshold/10
             edge_reg(ii, jj) = 1;
         elseif R > threshold
             corner_reg(ii, jj) = 1;
@@ -149,6 +149,17 @@ hold off;
 sgtitle("Full screen to show better the corner detection on imgi235 (esc to close)")
 
 %% Centroid corner
+% corner centroids using regionprops
+prop=regionprops(corner_reg, 'Area','Centroid','BoundingBox');
+figure,imagesc(imgi235),colormap gray,title('detected object')
+% 
+% for k = 1 : length(prop)
+%     xc=floor(prop(k).Centroid(1));
+%     yc=floor(prop(k).Centroid(2));
+% 
+%     hold on
+%     plot(xc,yc,'*r')
+% end
 figure;
 % corner centroids using regionprops
 prop = regionprops(corner_reg > 0, "Centroid");
