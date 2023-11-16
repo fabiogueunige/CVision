@@ -9,7 +9,7 @@ Please, read carefully the text below before starting and download the material 
 ### Part 1
 Implement the following functions/scripts:
 
-1. 8-point algorithm function (version 1) --  A Matlab function function [F] = EightPointsAlgorithm(P1, P2) implementing the following steps:
+1.   8-point algorithm function (version 1) --  A Matlab function function [F] = EightPointsAlgorithm(P1, P2) implementing the following steps:
 
  Write down the matrix A (see the slides...)
 Compute the SVD decomposition of A 
