@@ -2,8 +2,14 @@
 
 New Computer Vision laboratories
 
-This project is organised in different branches. 
+## This project is organised in different branches. 
 
- - master: Where there are all the generic stuff
- - - Every Lab for the different assignment
-   - - andre e fabio for the two differents implementation
+ - main: Where there are all the generic stuff
+ - other branch relatives to the different laboratory_ 
+ 	- Lab_4
+ 	- Lab5
+ 	- Lab_5_Andrea 
+ 	- LAb_5_Fabio
+ 
+ 
+
