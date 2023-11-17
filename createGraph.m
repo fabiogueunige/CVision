@@ -15,4 +15,11 @@ function createGraph (img,nomeImg,startadd, endadd)
     % print(imagefilename, '-dpng');
     % index = index + 1;
 
+    %% Save an image with hold on 
+    % frame = getframe(gcf);
+    % 
+    % % Converti il frame in un'immagine
+    % img12 = frame2im(frame);
+    % imwrite(img12, '2.png');
+
 end

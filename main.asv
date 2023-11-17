@@ -98,9 +98,9 @@ threshold = 0.3 * max_R;
 for ii = 1:rr
     for jj = 1:cc
         % Threshold on value of R
-        if R_map(ii,jj) < -threshold/10
+        if R < -threshold/10
             edge_reg(ii, jj) = 1;
-        elseif R_map(ii,jj) > threshold
+        elseif R > threshold
             corner_reg(ii, jj) = 1;
         else
             flat_reg(ii, jj) = 1;
@@ -112,50 +112,68 @@ end
 % R map and detected corners overlapped on the image
 figure;
 subplot(2, 2, 1);
-createGraph(I,"Original Image"," "," ");
+imagesc(R_map);
+colormap jet;
+title('R map');
 
 subplot(2, 2, 2);
-createGraph(I,"Detected Corners overlapped","","");
+imagesc(I);
 hold on;
 [yc, xc] = find(corner_reg);
 plot(xc, yc, 'r*');
 hold off;
-
+title('Detected Corners overlapped');
 
 subplot(2, 2, 3);
-createGraph(I,'Detected flat regions overlapped'," ","");
+imagesc(I);
 hold on;
 [y, x] = find(flat_reg);
 plot(x, y, 'y*');
 hold off;
+title('Detected flat regions overlapped');
 
 subplot(2, 2, 4);
-createGraph(I,'Detected edge regions overlapped'," "," ");
+imagesc(I);
 hold on;
 [y, x] = find(edge_reg);
 plot(x, y, 'g*');
 hold off;
+title('Detected edge regions overlapped');
 sgtitle('Show detected object on Image');
 
 % corner regions with threshold printing
 figure('WindowState', 'fullscreen');
 subplot (1,2,1);
-imagesc(R_map);
-colormap jet;
-title('R map');
-
+createGraph(corner_reg .* I,'Corner regions gray'," "," ");
 
 subplot(1,2,2);
-createGraph(corner_reg .* I,'Corner regions only'," "," ");
+createGraph(I,"Detected Corners"," "," ");
+hold on;
+plot(xc, yc, 'r*', 'MarkerSize', 3);
+hold off;
 sgtitle("Full screen to show better the corner detection on imgi235 (esc to close)")
 
-%% Centroid corne
+%% Centroid corner
+% % corner centroids using regionprops
+% prop=regionprops(corner_reg, 'Area','Centroid','BoundingBox');
+% figure,imagesc(imgi235),colormap gray,title('detected object')
+% % 
+
+% figure;
 % corner centroids using regionprops
 figure;
-createGraph(I,"Centroid of Corner Regions"," "," ");
 prop = regionprops(corner_reg > 0, "Centroid");
-centroids = cat(1, prop.Centroid);
-% centroids on command Window
-hold on;
-plot(centroids(:,1), centroids(:,2), 'r*');
-hold off;
+for k = 1 : length(prop)
+    xc=floor(prop(k).Centroid(1));
+    yc=floor(prop(k).Centroid(2));
+
+    hold on
+    plot(xc,yc,'*r')
+end
+% centroids = cat(1, prop.Centroid);
+% % centroids on command Window
+% createGraph(I,"Centroid of Corner Regions"," "," ");
+% hold on;
+% 
+% plot(centroids(:,1), centroids(:,2), 'r*');
+% hold off;
