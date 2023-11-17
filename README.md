@@ -4,14 +4,14 @@
 
 The goal of the lab is to implement the 8-point algorithm, to estimate the fundamental matrix F.
 
-Please, read carefully the text below before starting and download the material from HERE.
+Please, read carefully the text below before starting and download the material from [HERE](https://2023.aulaweb.unige.it/pluginfile.php/128897/mod_assign/intro/lab6_material.zip).
 
 ### Part 1
 Implement the following functions/scripts:
 
-1.   8-point algorithm function (version 1) --  A Matlab function function [F] = EightPointsAlgorithm(P1, P2) implementing the following steps:
-
- Write down the matrix A (see the slides...)
+1. Do 8-point algorithm function (version 1) --  A Matlab function function [F] = EightPointsAlgorithm(P1, P2) implementing the following steps:
+P1 is a matrix that contains all the point of the first image [x1,y1,1;... ; xn,yn,1]
+Write down the matrix A (see the slides...)
 Compute the SVD decomposition of A 
 [U, D, V]=svd(A);
 and select as solution f the last column of V.
