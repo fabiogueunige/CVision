@@ -9,7 +9,7 @@ Implement the following functions/scripts:
 
 1. 8-point algorithm function (version 1) --  A Matlab function function [F] = EightPointsAlgorithm(P1, P2) implementing the following steps:
 
- Write down the matrix A (see the slides...)
+Write down the matrix A (see the slides...)
 Compute the SVD decomposition of A 
 [U, D, V]=svd(A);
 and select as solution f the last column of V.
@@ -19,6 +19,8 @@ Use again the SVD to decompose the matrix
 [U, D, V] = svd(F)
 Set D(3,3)=0
 Recompute the final F: F=U*D*VT.
+
+
 2. 8-point algorithm function (version2) -- A Matlab function function [F] = EightPointsAlgorithmN(P1, P2) implementing the following steps:
 
 Normalize the points using the function normalise2dpts already provided.
@@ -27,6 +29,8 @@ Normalize the points using the function normalise2dpts already provided.
 [nP2, T2]=normalise2dpts(P2)
 Call the function EightPointsAlgorithm on the normalized points
 De-normalize the resulting F as T2T*F*T1. This is your final F
+
+
 3. A script file to check the correctness of the implementation, and evaluate the results -- It should include the following functionalities:
 
 Load the two sets of corresponding points already provided and arrange them in two matrices P1 and P2 of size 3xN (or Nx3), where N is the number of corresponding points. NOTE: the size 3 is because you need to add a final 1 to the 2D image coordinates as you will work in homogeneous coordinates 
