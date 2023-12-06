@@ -23,19 +23,20 @@ Implement the following functions/scripts:
 
 
 2. 8-point algorithm function (version2) -- A Matlab function function [F] = EightPointsAlgorithmN(P1, P2) implementing the following steps:
-   Normalize the points using the function normalise2dpts already provided.
-   [nP1, T1] = normalise2dpts(P1)
+   
+Normalize the points using the function normalise2dpts already provided.
+[nP1, T1] = normalise2dpts(P1)
 
-   [nP2, T2]=normalise2dpts(P2)
-   Call the function EightPointsAlgorithm on the normalized points 
-   De-normalize the resulting F as T2T*F*T1. This is your final F
+[nP2, T2]=normalise2dpts(P2)
+Call the function EightPointsAlgorithm on the normalized points 
+De-normalize the resulting F as T2T*F*T1. This is your final F
 
 
 3. A script file to check the correctness of the implementation, and evaluate the results -- It should include the following functionalities:
 
-   Load the two sets of corresponding points already provided and arrange them in two matrices P1 and P2 of size 3xN (or Nx3), where N is the number of corresponding points. NOTE: the    size    3 is because you need to add a final 1 to the 2D image coordinates as you will work in homogeneous coordinates 
-   Call the function  for estimating the fundamental matrix F from P1 and P2
-   Visualize the results and evaluate your estimated F (see Evaluation of the results below)
+Load the two sets of corresponding points already provided and arrange them in two matrices P1 and P2 of size 3xN (or Nx3), where N is the number of corresponding points. NOTE: the    size    3 is because you need to add a final 1 to the 2D image coordinates as you will work in homogeneous coordinates 
+Call the function  for estimating the fundamental matrix F from P1 and P2
+Visualize the results and evaluate your estimated F (see Evaluation of the results below)
 
 
 ### Part 2
