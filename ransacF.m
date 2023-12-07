@@ -38,4 +38,5 @@ end
 
 function [residual] = testF(F, P1, P2)
    % put your code here
+   % to calculate the errors between the errors and the exstimated model
 end

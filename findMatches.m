@@ -44,13 +44,12 @@ plot(F2(1,:), F2(2,:), '*');
 
 % From now on, we use F1, D1 and F2, D2
 
-if(strcmp(type, 'NCC'))
-    
+if(strcmp(type, 'NCC'))    
     %% MATCHING CONSIDERING EUCLIDEAN DISTANCE BETWEEN POSITIONS AND PATCHES SIMILARITY
 
     % SET SIGMA (for the euclidean distance contribution) TO AN APPROPRIATE
     % VALUE
-    sigma = 10; % siga is at the exponent, usefull for understand the grandezza of the pRTH TO CONFRONT WIRTH The other image
+    sigma = 5; % siga is at the exponent, usefull for understand the grandezza of the pRTH TO CONFRONT WIRTH The other image
 %this simga is consider, much sigma is big less i give importance to
 %euclidean distance between point 
 
@@ -97,7 +96,6 @@ if(strcmp(type, 'NCC'))
 
 elseif(strcmp(type,'SIFT'))
 
-
     %% MATCHING USING SIFT DESCRIPTORS
 
     % SET THE SIGMA TO AN APPROPRIATE VALUE (notice this time it refers to the
@@ -132,6 +130,4 @@ elseif(strcmp(type,'SIFT'))
             list = [list; F1(2:-1:1,i)' F2(2:-1:1,j)'];
         end
     end
-
-    
 end
