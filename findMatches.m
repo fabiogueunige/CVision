@@ -49,7 +49,7 @@ if(strcmp(type, 'NCC'))
 
     % SET SIGMA (for the euclidean distance contribution) TO AN APPROPRIATE
     % VALUE
-    sigma = 5; % siga is at the exponent, usefull for understand the grandezza of the pRTH TO CONFRONT WIRTH The other image
+    sigma = 7; % siga is at the exponent, usefull for understand the grandezza of the pRTH TO CONFRONT WIRTH The other image
 %this simga is consider, much sigma is big less i give importance to
 %euclidean distance between point 
 

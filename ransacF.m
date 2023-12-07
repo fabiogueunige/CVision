@@ -15,12 +15,13 @@ function [bestF, consensus, outliers] = ransacF(P1, P2, th)
 
     while ii < iter
         perm = randperm(N);
-        P1iter = P1(: perm(1:8)); % select 8 random pairs
-        P2iter = P2(: perm(1:8)); % select 8 random pairs
+        %
+        P1iter = P1(: ,perm(1:8)); % select 8 random pairs
+        P2iter = P2(: ,perm(1:8)); % select 8 random pairs
 
         F = EightPointsAlgorithmN(P1iter, P2iter);
 
-        residuals = testF(F, P1iter, P2iter); % <--  THIS IS A FUNCTION YOU NEED TO IMPLEMENT, SEE BELOW!
+        residuals = testF(F, P1, P2); % <--  THIS IS A FUNCTION YOU NEED TO IMPLEMENT, SEE BELOW!
 
         nInlier = sum(residuals < th) / N; % current estimated inliers
         
@@ -36,7 +37,14 @@ function [bestF, consensus, outliers] = ransacF(P1, P2, th)
 end
 
 
-function [residual] = testF(F, P1, P2)
-   % put your code here
-   % to calculate the errors between the errors and the exstimated model
+function [residuals] = testF(F, P1, P2)
+    N = size(P1, 2);
+    residuals = zeros(1, N);
+
+    for i = 1:N
+        % Calcola l'errore (residuo) per ciascuna coppia di punti
+        % Calcola l'epipolar constraint: x'Fx = 0
+        residuals(i) = abs(P2(:, i)' * F * P1(:, i));
+    end
 end
+
