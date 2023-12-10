@@ -6,7 +6,7 @@ function [list] = findMatches(img1, img2, type)
 % d1_all and d2_all contain the sift descriptors 
 
 points1 = detectSIFTFeatures(img1); % the detection algorithm decide the key point, corners, edge, some other type of interest
-%after weneed to estimate a descriptor for that points
+%after we need to estimate a descriptor for that points
 f1_all = points1.Location;% i have sequence of immages points of interest
 d1_all = extractFeatures(img1,points1,Method="SIFT"); % descriptor for all poin
 
@@ -33,23 +33,24 @@ idx = f2_all(1,:) > delta & f2_all(1,:) < size(img2,2)-delta & f2_all(2,:) > del
 F2 = f2_all(:,idx);
 D2 = d2_all(:,idx);
 
-
-figure(1);
-imshow(img1),hold on;
-plot(F1(1,:), F1(2,:), '*');
-
-figure(2);
-imshow(img2),hold on;
-plot(F2(1,:), F2(2,:), '*');
+% 
+% figure(1);
+% imshow(img1),hold on;
+% plot(F1(1,:), F1(2,:), '*');
+% 
+% figure(2);
+% imshow(img2),hold on;
+% plot(F2(1,:), F2(2,:), '*');
 
 % From now on, we use F1, D1 and F2, D2
 
-if(strcmp(type, 'NCC'))    
+if(strcmp(type, 'NCC'))
+    
     %% MATCHING CONSIDERING EUCLIDEAN DISTANCE BETWEEN POSITIONS AND PATCHES SIMILARITY
 
     % SET SIGMA (for the euclidean distance contribution) TO AN APPROPRIATE
     % VALUE
-    sigma = 7; % siga is at the exponent, usefull for understand the grandezza of the pRTH TO CONFRONT WIRTH The other image
+    sigma = 10; % siga is at the exponent, usefull for understand the grandezza of the pRTH TO CONFRONT WIRTH The other image
 %this simga is consider, much sigma is big less i give importance to
 %euclidean distance between point 
 
@@ -96,6 +97,7 @@ if(strcmp(type, 'NCC'))
 
 elseif(strcmp(type,'SIFT'))
 
+
     %% MATCHING USING SIFT DESCRIPTORS
 
     % SET THE SIGMA TO AN APPROPRIATE VALUE (notice this time it refers to the
@@ -130,4 +132,6 @@ elseif(strcmp(type,'SIFT'))
             list = [list; F1(2:-1:1,i)' F2(2:-1:1,j)'];
         end
     end
+
+    
 end
