@@ -13,7 +13,7 @@ function [F] = EightPointsAlgorithm(P1, P2,row_number)
     F = reshape(f, [3, 3]);
     
     % Force the rank of f to be 2
-    [U, D, V] = svd(F)
+    [U, D, V] = svd(F);
     D(3,3) = 0;
     F = U*D*V';
 end

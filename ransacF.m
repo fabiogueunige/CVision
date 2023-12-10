@@ -15,14 +15,14 @@ function [bestF, consensus, outliers] = ransacF(P1, P2, th)
 
     while ii < iter
         perm = randperm(N);
-        P1iter = P1(: perm(1:8)); % select 8 random pairs
-        P2iter = P2(: perm(1:8)); % select 8 random pairs
+        P1iter = P1(:, perm(1:8)); % select 8 random pairs
+        P2iter = P2(:, perm(1:8)); % select 8 random pairs
 
         F = EightPointsAlgorithmN(P1iter, P2iter);
 
         residuals = testF(F, P1iter, P2iter); % <--  THIS IS A FUNCTION YOU NEED TO IMPLEMENT, SEE BELOW!
 
-        nInlier = sum(residuals < th) / N; % current estimated inliers
+        nInlier = sum(residuals < th) / 8; % current estimated inliers
         
         if(nInlier > bestNInlier) % if number of inliers grows
            bestNInlier = nInlier; % update of the fly the probability of having inliers
@@ -37,5 +37,9 @@ end
 
 
 function [residual] = testF(F, P1, P2)
-   % put your code here
+  [rr,cc] = size(P1);
+  for i = 1:1:cc
+    % evaluate the epipolar constraint for not normalized point 
+    residual(i) = abs(P2(:,i)' * F * P1(:,i));
+  end
 end
