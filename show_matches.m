@@ -36,5 +36,4 @@ hold on;
             plot([coords(2), (N+coords(4))], [coords(1), coords(3)], 'b', 'LineWidth', 1);
         end
     end
-
 end

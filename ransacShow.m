@@ -1,4 +1,4 @@
-function ransacShow (list)
+function [bestF, consensus, outliers] = ransacShow (img1,img2,list,th)
     A_1 = [list(:, 1:2)];
     B_1 = [list(:, 3:4)];
 
@@ -12,12 +12,11 @@ function ransacShow (list)
     B = [B_1, ones_column];
     B = B';
     
-    [bestF, consensus, outliers] = ransacF(A, B, 0.008);
+    [bestF, consensus, outliers] = ransacF(A, B, th);
     % Points of first image 
     A_2 = consensus(1:2, :)';
     B_2 = consensus(4:5, :)';
-    visualizeEpipolarLines(imgM1, imgM2, bestF, A_2, B_2);
 
-    % [bestF, consensus, outliers] = ransacF(A, B, 0.01);
+    figure, visualizeEpipolarLines(img1, img2, bestF, A_2, B_2);
    
 end
