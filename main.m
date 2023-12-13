@@ -23,8 +23,8 @@ ones_columnM = ones(row_numberM, 1);
 % convert in homogeneous cordinate
 PM1 = [P1M_1, ones_columnM];
 PM1 = PM1';
-% want to consider a row vector
 
+% want to consider a row vector
 PM2 = [P2M_2, ones_columnM];
 PM2 = PM2';
 
@@ -34,8 +34,8 @@ ones_columnR = ones(row_numberR, 1);
 % convert in homogeneous cordinate
 PR1 = [P1R_1, ones_columnR];
 PR1 = PR1';
-% want to consider a row vector
 
+% want to consider a row vector
 PR2 = [P2R_2, ones_columnR];
 PR2 = PR2';
 
@@ -85,7 +85,7 @@ visualizeEpipolarLines( imgR1, imgR2, FR_N, P1R_1, P2R_2);
 [U W V] = svd (FM_N);
 last_col_U = U(1:2,end); % epipole left image
 last_col_V = V(1:2,end); % epipole right image
-figure; % Questa parte non funziona!!!
+figure;
 Im = [imgM1 imgM2];
 imshow(Im);
 hold on
@@ -97,7 +97,7 @@ title ("Epipole image");
 
 %% Part 2
 % Find and show Matches for Rubick
-%listR_ncc = findMatches(imgR1, imgR2, 'NCC');
+listR_ncc = findMatches(imgR1, imgR2, 'NCC');
 listR_sift = findMatches(imgR1, imgR2, 'SIFT');
 
 %disp("Show Matches of ListR_ncc");
@@ -106,30 +106,26 @@ disp("Show Matches of ListR_sift");
 show_matches(imgR1, imgR2, listR_sift, 1, 11);
 
 %% Find and show matches for Mire
-%listM_ncc = findMatches(imgM1, imgM2, 'NCC');
+listM_ncc = findMatches(imgM1, imgM2, 'NCC');
 listM_sift = findMatches(imgM1, imgM2, 'SIFT');
 disp("Show Matches of ListM_ncc");
-%figure, show_matches(imgM1, imgM2, listM_ncc, 0, 10);
+show_matches(imgM1, imgM2, listM_ncc, 0, 10);
 disp("Show Matches of ListM_sift");
 show_matches(imgM1, imgM2, listM_sift, 1, 11), title("show matches");
 
 %% Find the correspondence point extimated with image matching
 %Ransac for Mire
-disp("Epipolar with  bestF listMncc");
+%disp("Epipolar with  bestF listMncc");
 %[bestFMN, consensusMN, outliersMN] = ransacShow(imgM1,imgM2,listM_ncc, 0.008);
-%problems
 disp("Epipolar with  bestF listMsift");
 [bestFMS, consensusMS, outliersMS] = ransacShow (imgM1,imgM2,listM_sift,0.008);
 %% Ransac for Rubick
-disp("Epipolar with  bestF listRncc");
-% [bestFRN, consensusRN, outliersRN] = ransacShow(imgR1,imgR2,listR_ncc, 0.008);
+%disp("Epipolar with  bestF listRncc");
+%[bestFRN, consensusRN, outliersRN] = ransacShow(imgR1,imgR2,listR_ncc, 0.008);
 disp("Epipolar with  bestF listRsift");
 [bestFRS, consensusRS, outliersRS] = ransacShow(imgR1,imgR2,listR_sift, 0.008);
 
-% Check for a find matches che funzioni con una funzione built in di Matlab
-% (match feature)
 %% Matlab built in function
-%% Andre problema con Ransac magari poi chiediamo a Nicco per sistemarla perchè qualcosa non torna
 matchesM = findMatchesMat(imgM1, imgM2);
 matchesR = findMatchesMat(imgR1, imgR2);
 
