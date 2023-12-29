@@ -11,6 +11,8 @@ for k = 0:18
     string2_next = num2str((k + 1));
     stringtot2 = strcat(stringa1, string2_next, stringa3);
     [U,V] = TwoFramesLK(stringtot, stringtot2, 10);
-    
+    %disp(U);
+    %disp(V);
+    %pause(5);
     %title(['Frames: ' num2str(k) ' - ' num2str(k + 1)]);
 end
