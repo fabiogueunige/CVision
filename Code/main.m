@@ -1,4 +1,4 @@
-addpath("Video\")
+addpath("Video/")
 % ottengo percorso dove si trova il main
 
 

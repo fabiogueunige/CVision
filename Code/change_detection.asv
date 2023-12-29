@@ -54,14 +54,13 @@ B = B / N; % Media tra i primi 5 frame
 
 % Play with these parameters
 TAU = 25; 
-TAU_PRIMO = 20;
+TAU_PRIMO;
 ALPHA = 0.9;
 
 % Now start the change detection while updating the background with the
 % running average. For that you have to set the values for TAU and ALPHA
 
 Bprev = B;
-figure;
 for t = FIRST_IDX+N : LAST_IDX
     
     filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
