@@ -55,7 +55,7 @@ B = B / N; % Media tra i primi 5 frame
 % Play with these parameters
 TAU = 25; 
 TAU_PRIMO = 20;
-ALPHA = 0.9;
+ALPHA = 0.6;
 
 % Now start the change detection while updating the background with the
 % running average. For that you have to set the values for TAU and ALPHA
