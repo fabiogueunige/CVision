@@ -1,0 +1,52 @@
+addpath ("Video\")
+
+FIRST_IDX = 250; %index of first image
+LAST_IDX = 320; % index of last image
+N = 5;
+
+filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', FIRST_IDX);
+B = double(rgb2gray(imread(filename)));
+% Generating the background for the change Detection algorithm
+for t = FIRST_IDX+1 : FIRST_IDX + N-1
+    filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
+    B = B + double(rgb2gray(imread(filename)));  
+end
+
+B = B / N; % Average through the first 5 frames
+Bprev = B;
+for t = FIRST_IDX+N : LAST_IDX
+    filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
+    figure;
+    % Lucas Kanade implementation    
+    filename2 = sprintf('Video/videosurveillance/frame%4.4d.jpg', (t-1));
+    [U,V, At, At1] = TwoFramesLK(filename2,filename,15);
+    subplot(2,3,1)
+    imshow(At)
+    title("Previouse")
+    subplot(2,3,2)
+    imshow(At1)
+    title("Actual")
+    subplot(2,3,3)
+    quiver(U(1:10:size(U,1), 1:10:size(U,2)), V(1:10:size(V,1), 1:10:size(V,2)))
+    quiver(Reduce((Reduce(medfilt2(flipud(U),[5 5])))), -Reduce((Reduce(medfilt2(flipud(V),[5 5])))), 0), axis equal
+    title("LK magnitude")
+    % Change Detection Implementation
+    [It,Bt,Mt] = change_detection(Bprev, filename);
+    
+    % keyboard
+    subplot(2,3,4), imshow(It);
+    title("Actual");
+    subplot(2,3,5), imshow(uint8(Bt));
+    title("Background");
+    subplot(2,3,6), imshow(uint8(Mt*255));
+    title("binary map");
+    pause(0.1);
+    Bprev = Bt;     
+    imc = num2str(t);
+    filename2 = strcat("Image ",imc," Optical Flow vs Change Detection");
+    sgtitle(filename2)
+end
+
+function result = Reduce(matrix)
+    result = matrix(1:2:end, 1:2:end);
+end
