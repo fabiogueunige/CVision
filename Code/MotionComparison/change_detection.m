@@ -1,9 +1,7 @@
-function [It, Bt,Mt] = change_detection(Bprev, filename)
+function [It, Bt,Mt] = change_detection(Bprev, filename, TAU, TAU_PRIMO, ALPHA)
     
     % Play with these parameters
-    TAU = 25; 
-    TAU_PRIMO = 20;
-    ALPHA = 0.7;
+
     
     % Now start the change detection while updating the background with the
     % running average. For that you have to set the values for TAU and ALPHA
