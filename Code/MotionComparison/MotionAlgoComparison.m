@@ -1,17 +1,18 @@
 %% General topic
-
-addpath ("Video\")
+addpath ("..\Video\");
+addpath("..\Video\sflowg\")
+addpath("..\Video\sphere\")
 
 N = 5;
 %% Surveillance Video
 
 FIRST_IDX = 250; %index of first image
 LAST_IDX = 320; % index of last image
-filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', FIRST_IDX);
+filename = sprintf('videosurveillance/frame%4.4d.jpg', FIRST_IDX);
 B = double(rgb2gray(imread(filename)));
 % Generating the background for the change Detection algorithm
 for t = FIRST_IDX+1 : FIRST_IDX + N-1
-    filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
+    filename = sprintf('videosurveillance/frame%4.4d.jpg', t);
     B = B + double(rgb2gray(imread(filename)));  
 end
 
@@ -19,13 +20,13 @@ B = B / N; % Average through the first 5 frames
 Bprev = B;
 figure;
 for t = FIRST_IDX+N : LAST_IDX
-    filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
+    filename = sprintf('videosurveillance/frame%4.4d.jpg', t);
     
     imc = num2str(t);
     filename2 = strcat("Image ",imc," Optical Flow vs Change Detection");
     sgtitle(filename2)
     % Lucas Kanade implementation    
-    filename2 = sprintf('Video/videosurveillance/frame%4.4d.jpg', (t-1));
+    filename2 = sprintf('videosurveillance/frame%4.4d.jpg', (t-1));
     [U,V, At, At1] = TwoFramesLK(filename2,filename,15);
     subplot(2,3,1)
     imshow(At)
@@ -57,11 +58,11 @@ end
 %% Video sflowg (not the right sequence for the algorithm becouse the camea moves and not the background)
 FIRST_IDX = 0; %index of first image
 LAST_IDX = 60; % index of last image
-filename = sprintf('Video/sflowg/sflowg_%3.3d.ppm', FIRST_IDX);
+filename = sprintf('sflowg_%3.3d.ppm', FIRST_IDX);
 B = double(rgb2gray(imread(filename)));
 % Generating the background for the change Detection algorithm
 for t = FIRST_IDX+1 : FIRST_IDX + N-1
-    filename = sprintf('Video/sflowg/sflowg_%3.3d.ppm', t);
+    filename = sprintf('sflowg_%3.3d.ppm', t);
     B = B + double(rgb2gray(imread(filename)));  
 end
 
@@ -73,9 +74,9 @@ for t = FIRST_IDX+N : LAST_IDX
     imc = num2str(t);
     filename2 = strcat("Image ",imc," Optical Flow vs Change Detection");
     sgtitle(filename2)
-    filename = sprintf('Video/sflowg/sflowg_%3.3d.ppm', t);
+    filename = sprintf('sflowg_%3.3d.ppm', t);
     % Lucas Kanade implementation    
-    filename2 = sprintf('Video/sflowg/sflowg_%3.3d.ppm', (t-1));
+    filename2 = sprintf('sflowg_%3.3d.ppm', (t-1));
     [U,V, At, At1] = TwoFramesLK(filename2,filename,15);
     subplot(2,3,1)
     imshow(At)
@@ -106,16 +107,13 @@ for t = FIRST_IDX+N : LAST_IDX
 end
 
 %% Video Sphere
-stringa1 = 'Video/sphere/sphere.';
-stringa3 = '.ppm';
 FIRST_IDX = 0; %index of first image
 LAST_IDX = 19; % index of last image
-B = double(rgb2gray(imread('Video/sphere/sphere.0.ppm')));
+B = double(rgb2gray(imread('sphere.0.ppm')));
 % Generating the background for the change Detection algorithm
 for k = FIRST_IDX+1 : FIRST_IDX + N-1
-    string2 = num2str(k);
-    stringtot = strcat(stringa1, string2, stringa3);
-    B = B + double(rgb2gray(imread(stringtot)));  
+    filename = sprintf('sphere.%1.1d.ppm', k);
+    B = B + double(rgb2gray(imread(filename)));  
 end
 
 B = B / N; % Average through the first 5 frames
@@ -126,11 +124,10 @@ for k = FIRST_IDX+N : LAST_IDX
     imc = num2str(k);
     filename2 = strcat("Image ",imc," Optical Flow vs Change Detection");
     sgtitle(filename2)
-    string2 = num2str(k);
-    stringtot = strcat(stringa1, string2, stringa3);
-    string2_next = num2str((k - 1));
-    stringtot2 = strcat(stringa1, string2_next, stringa3);
-    [U,V, At, At1] = TwoFramesLK(stringtot2,stringtot, 10);
+    filename = sprintf('sphere.%1.1d.ppm', k);
+    % Lucas Kanade implementation    
+    filename2 = sprintf('sphere.%1.1d.ppm', (k-1));
+    [U,V, At, At1] = TwoFramesLK(filename2,filename, 10);
     subplot(2,3,1)
     imshow(At)
     title("Previouse")
@@ -146,7 +143,7 @@ for k = FIRST_IDX+N : LAST_IDX
     TAU = 10; 
     TAU_PRIMO = 5;
     ALPHA = 0.3;
-    [It,Bt,Mt] = change_detection(Bprev, stringtot,TAU,TAU_PRIMO, ALPHA);
+    [It,Bt,Mt] = change_detection(Bprev, filename,TAU,TAU_PRIMO, ALPHA);
     
     % keyboard
     subplot(2,3,4), imshow(It);

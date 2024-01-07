@@ -1,6 +1,5 @@
 addpath ("..\Video\");
 addpath("..\Video\statua\")
-addpath("..\Video\videosurveillance\")
 %% Sphere Video
 stringa1 = 'sphere\sphere.';
 stringa3 = '.ppm';
@@ -17,7 +16,7 @@ for k = 0:18
 end
 
 %% VideoSurveillance (too many data so it is commented -> other videos ligther)
-% stringa1 = 'frame0';
+% stringa1 = 'videosurveillance\frame0';
 % stringa3 = '.jpg';
 % for k = 250:319
 %     string2 = num2str(k);

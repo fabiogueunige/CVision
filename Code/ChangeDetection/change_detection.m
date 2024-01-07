@@ -1,6 +1,6 @@
 %% Task 1: work on the videosurveillance sequence using a simple background obtained as an 
 % average between two empty frames
-
+addpath("..\Video\videosurveillance")
 % load two empty images
 B1 = double(rgb2gray(imread('EmptyScene01.jpg')));
 B2 = double(rgb2gray(imread('EmptyScene02.jpg')));
@@ -19,7 +19,7 @@ LAST_IDX = 320; % index of last image
 
 for t = FIRST_IDX : LAST_IDX
     
-    filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
+    filename = sprintf('frame%4.4d.jpg', t);
     It = imread(filename);
     Ig = rgb2gray(It);
     
@@ -28,7 +28,7 @@ for t = FIRST_IDX : LAST_IDX
     subplot(1, 3, 1), imshow(It);
     subplot(1, 3, 2), imshow(uint8(B));
     subplot(1, 3, 3), imshow(uint8(Mt*255));
-    pause(0.5)
+    pause(0.2)
 
 end
 
@@ -41,11 +41,11 @@ LAST_IDX = 320; % index of last image
 % Let's use the first N  frames to initialize the background
 N = 5;
 
-filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', FIRST_IDX);
+filename = sprintf('frame%4.4d.jpg', FIRST_IDX);
 B = double(rgb2gray(imread(filename)));
 for t = FIRST_IDX+1 : FIRST_IDX + N-1
     
-    filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
+    filename = sprintf('frame%4.4d.jpg', t);
     B = B + double(rgb2gray(imread(filename)));
     
 end
@@ -53,9 +53,9 @@ end
 B = B / N; % Media tra i primi 5 frame
 
 % Play with these parameters
-TAU = 25; 
-TAU_PRIMO = 20;
-ALPHA = 0.6;
+TAU = 40; 
+TAU_PRIMO = 35;
+ALPHA = 0.8;
 
 % Now start the change detection while updating the background with the
 % running average. For that you have to set the values for TAU and ALPHA
@@ -64,7 +64,7 @@ Bprev = B;
 figure;
 for t = FIRST_IDX+N : LAST_IDX
     
-    filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
+    filename = sprintf('frame%4.4d.jpg', t);
     
     It = imread(filename);
     Ig = rgb2gray(It);
