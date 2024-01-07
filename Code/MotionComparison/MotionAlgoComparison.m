@@ -2,9 +2,7 @@
 
 addpath ("Video\")
 
-
 N = 5;
-
 %% Surveillance Video
 
 FIRST_IDX = 250; %index of first image
@@ -19,9 +17,10 @@ end
 
 B = B / N; % Average through the first 5 frames
 Bprev = B;
+figure;
 for t = FIRST_IDX+N : LAST_IDX
     filename = sprintf('Video/videosurveillance/frame%4.4d.jpg', t);
-    figure;
+    
     imc = num2str(t);
     filename2 = strcat("Image ",imc," Optical Flow vs Change Detection");
     sgtitle(filename2)
@@ -55,7 +54,7 @@ for t = FIRST_IDX+N : LAST_IDX
     Bprev = Bt;     
 end
 
-%% Video sflowg
+%% Video sflowg (not the right sequence for the algorithm becouse the camea moves and not the background)
 FIRST_IDX = 0; %index of first image
 LAST_IDX = 60; % index of last image
 filename = sprintf('Video/sflowg/sflowg_%3.3d.ppm', FIRST_IDX);
@@ -68,8 +67,9 @@ end
 
 B = B / N; % Average through the first 5 frames
 Bprev = B;
+figure;
 for t = FIRST_IDX+N : LAST_IDX
-    figure;
+    
     imc = num2str(t);
     filename2 = strcat("Image ",imc," Optical Flow vs Change Detection");
     sgtitle(filename2)
@@ -120,8 +120,9 @@ end
 
 B = B / N; % Average through the first 5 frames
 Bprev = B;
+figure;
 for k = FIRST_IDX+N : LAST_IDX
-    figure;
+    
     imc = num2str(k);
     filename2 = strcat("Image ",imc," Optical Flow vs Change Detection");
     sgtitle(filename2)
@@ -142,9 +143,9 @@ for k = FIRST_IDX+N : LAST_IDX
     title("LK magnitude")
     
     % Change Detection Implementation
-    TAU = 25; 
-    TAU_PRIMO = 20;
-    ALPHA = 0.7;
+    TAU = 10; 
+    TAU_PRIMO = 5;
+    ALPHA = 0.3;
     [It,Bt,Mt] = change_detection(Bprev, stringtot,TAU,TAU_PRIMO, ALPHA);
     
     % keyboard
@@ -156,7 +157,6 @@ for k = FIRST_IDX+N : LAST_IDX
     title("binary map");
     pause(0.1);
     Bprev = Bt;
-
 end
 %% Functions
 
